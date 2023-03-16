@@ -1,26 +1,38 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div v-if="isAuth === false">
+    <projectPage v-on:auth="authUser"/>
+  </div>
+  <div v-else>
+    <div>Ну, функционал ещё готовится</div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import projectPage from './components/projects.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    projectPage
+  },
+  data() {
+    return {
+      isAuth: false
+    }
+  },
+  methods: {
+    authUser() {
+      this.isAuth = true;
+     // window.location.href = '/homepage'
+    }
   }
 }
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Inter', serif;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
