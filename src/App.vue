@@ -2,37 +2,49 @@
   <div v-if="isAuth === false">
     <projectPage v-on:auth="authUser"/>
   </div>
+  <div v-else-if="addProject === false">
+    <projectPageAuth username="Sergey Lebedev" v-on:add="goToTheProjectPage"/>
+  </div>
   <div v-else>
-    <div>Ну, функционал ещё готовится</div>
+    <div>Функционал ещё готовится</div>
   </div>
 </template>
 
 <script>
 import projectPage from './components/projects.vue'
-
+import projectPageAuth from './components/projectsAuth.vue'
 export default {
   name: 'App',
   components: {
-    projectPage
+    projectPage,
+    projectPageAuth
   },
   data() {
     return {
-      isAuth: false
+      isAuth: false,
+      addProject: false
     }
   },
   methods: {
     authUser() {
       this.isAuth = true;
-     // window.location.href = '/homepage'
+    },
+    goToTheProjectPage() {
+      this.addProject = true;
     }
   }
 }
 </script>
 
 <style>
+
 #app {
-  font-family: 'Inter', serif;
+  font-family: 'Inter', sans-serif;
   text-align: center;
   color: #2c3e50;
+}
+* {
+  margin: 0;
+  padding: 0;
 }
 </style>

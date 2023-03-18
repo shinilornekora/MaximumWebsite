@@ -52,8 +52,10 @@ export default {
   },
 }
 </script>
-
 <style scoped>
+* {
+  box-sizing: border-box;
+}
 .project {
   width: 360px;
   height: 368px;
@@ -79,6 +81,7 @@ export default {
   display: flex;
   align-content: flex-start;
   padding-left: 10px;
+  font-size: 18px;
 }
 
 .author__name {
@@ -90,11 +93,13 @@ export default {
 .review {
   display: flex;
   align-items: flex-start;
+  justify-content: left;
   padding-top: 15px;
   font-weight: 400;
-  font-size: 15px;
+  font-size: 13px;
   line-height: 18px;
   color: #6B6F7B;
+  text-align: center;
   padding-left: 10px;
 }
 </style>

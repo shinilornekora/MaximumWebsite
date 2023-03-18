@@ -5,7 +5,10 @@
         <strong class="page__name">PROJECT</strong>
         <button class="sort__button">Сортировка ></button>
       </div>
-      <button class="sign__in" v-on:click="showPopUp()">Вход в систему</button>
+      <div class="wrapper__second">
+        <div class="username">{{username}}</div>
+        <button class="add__project" v-on:click="addProject">Добавить проект</button>
+      </div>
     </div>
   </div>
   <div class="project__placement">
@@ -33,18 +36,15 @@
 <script>
 import addProject from './project'
 export default {
-  name: 'projectPage',
+  name: 'projectPageAuth',
   props: {
-    msg: String
+    username: String
   },
   components: {
     addProject
   },
   data() {
     return {
-      isVisiblePop: false,
-      login: '',
-      password: '',
       objects: [ {
         name: 'калькулятор',
         authName: 'Nair',
@@ -66,23 +66,8 @@ export default {
     }
   },
   methods: {
-    showPopUp() {
-      this.isVisiblePop = true
-    },
-    loginFieldChange(event) {
-      this.login = event.target.value
-    },
-    passwordFieldChange(event) {
-      this.password = event.target.value
-    },
-    checkInDatabase() {
-      this.authorizeUser()
-    },
-    authorizeUser() {
-      this.$emit("auth", "Авторизация пользователя с конкретными значениями")
-    },
-    makeItStorm() {
-      return 1;
+    addProject() {
+      this.$emit("add", "Пользователь захотел добавить проект")
     }
   }
 }
@@ -138,7 +123,7 @@ export default {
   box-shadow: 0 0;
 }
 
-.sign__in {
+.add__project {
   background: #0057FF;
   color: #EEEEEE;
   border-radius: 40px;
@@ -243,4 +228,18 @@ button:hover {
   margin-top: 40px;
 }
 
+.wrapper__second {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+
+.username {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #1B1C1F;
+}
 </style>
