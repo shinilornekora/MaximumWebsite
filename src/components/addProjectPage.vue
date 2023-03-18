@@ -11,6 +11,26 @@
       </div>
     </div>
   </div>
+  <div class="project__add">
+    <div class="gif__place">
+      <div class="GIF__placement">
+        <div class="helpful__text">GIF</div>
+      </div>
+      <div class="link__helpful">
+        Как сделать GIF:
+        <a href="/">ссылка</a>
+      </div>
+    </div>
+    <div class="project__info">
+      <div class="project__information">
+        <input type="text" placeholder="Название проекта"/>
+        <textarea placeholder="Описание"/>
+      </div>
+      <div class="zip__archive">
+        <div class="zipper">ZIP</div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -119,10 +139,96 @@ button:hover {
   gap: 40px;
 }
 
+.project__add {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-content: flex-start;
+  margin-top: 140px;
+  height: 900px;
+  justify-content: center;
+  gap: 40px;
+}
+
+.gif__place {
+  width: 560px;
+  height: 420px;
+  background: #D7D9DE;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  justify-content: center;
+}
+
 .username {
   font-weight: 500;
   font-size: 16px;
   line-height: 20px;
   color: #1B1C1F;
+}
+
+.project__info {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5% 0;
+  height: 420px;
+  gap: 40px;
+}
+
+.project__information {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  color: #6B6F7B;
+  font-weight: 100;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.project__information input, .project__information textarea{
+  padding: 10px 10px;
+  width: 560px;
+  font-size: 16px;
+}
+
+.zip__archive {
+  width: 120px;
+  height: 120px;
+  display: flex;
+  background: #D1D9F5;
+  border: 2px dashed #0057FF;
+  border-radius: 10px;
+  justify-content: center;
+}
+
+.zipper {
+  align-self: center;
+}
+
+
+.GIF__placement {
+  width: 120px;
+  height: 120px;
+  display: flex;
+  background: #D1D9F5;
+  border: 2px dashed #0057FF;
+  border-radius: 10px;
+  justify-content: center;
+  align-self: center;
+}
+
+.GIF__placement:hover, .zip__archive:hover {
+  cursor: pointer;
+}
+
+.helpful__text {
+  align-self: center;
+}
+
+.link__helpful a {
+  color: #0057FF;
+  text-decoration: none;
+  font-weight: 400;
 }
 </style>
