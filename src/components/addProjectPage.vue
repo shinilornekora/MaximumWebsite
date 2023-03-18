@@ -7,58 +7,21 @@
       </div>
       <div class="wrapper__second">
         <div class="username">{{username}}</div>
-        <button class="add__project" v-on:click="addProject">Добавить проект</button>
+        <button class="add__project">Добавить проект</button>
       </div>
-    </div>
-  </div>
-  <div class="project__placement">
-    <div v-for="data in objects" :key="data.index">
-      <addProject v-bind:obj=data />
     </div>
   </div>
 </template>
 
 <script>
-import addProject from './project'
 export default {
-  name: 'projectPageAuth',
+  name: "addProjectPage",
   props: {
     username: String
-  },
-  components: {
-    addProject
-  },
-  data() {
-    return {
-      objects: [ {
-        name: 'калькулятор',
-        authName: 'Nair',
-        rating: "4",
-        amountOfPupils: "14"
-      },
-        {
-          name: 'Закодил мультиварку',
-          authName: 'Segera Lebedev',
-          rating: "5",
-          amountOfPupils: "65"
-        },
-        {
-          name: 'Комп',
-          authName: 'Segera Lebedev',
-          rating: "4",
-          amountOfPupils: "0"
-        }]
-    }
-  },
-  methods: {
-    addProject() {
-      this.$emit("add", "Пользователь захотел добавить свой проект")
-    }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 * {
   margin: 0;
@@ -131,19 +94,9 @@ export default {
   border-radius: 40px;
 }
 
-.project__placement {
-  margin-top: 90px;
-  width: 100%;
-  justify-content: center;
-  display: flex;
-  flex-direction: row;
-  gap: 40px;
-  flex-wrap: wrap;
-}
 button:hover {
   cursor: pointer;
 }
-
 
 .credentials input {
   width: 440px;

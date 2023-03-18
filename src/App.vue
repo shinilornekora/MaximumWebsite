@@ -6,18 +6,20 @@
     <projectPageAuth username="Sergey Lebedev" v-on:add="goToTheProjectPage"/>
   </div>
   <div v-else>
-    <div>Функционал ещё готовится</div>
+    <add-project-page username="Sergey Lebedev"/>
   </div>
 </template>
 
 <script>
 import projectPage from './components/projects.vue'
 import projectPageAuth from './components/projectsAuth.vue'
+import addProjectPage from "./components/addProjectPage";
 export default {
   name: 'App',
   components: {
     projectPage,
-    projectPageAuth
+    projectPageAuth,
+    addProjectPage
   },
   data() {
     return {
