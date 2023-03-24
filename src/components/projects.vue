@@ -10,28 +10,30 @@
   </div>
   <div class="project__placement">
     <div v-for="data in objects" :key="data.index">
-      <addProject v-bind:obj=data />
+      <addProject v-bind:obj=data v-on:touch="testFunction"/>
     </div>
   </div>
   <div v-if="isVisiblePop === true">
     <div class="b-popup">
-      <div class="b-popup-content">
+      <a class="b-popup-content">
+        <img src="@/assets/cross.svg" alt="cross.svg" v-on:click="hidePopUp"/>
         <div class="login__text">
           Вход в систему
         </div>
         <div class="credentials">
           <input type="text" placeholder="Логин" v-on:input="loginFieldChange">
-          <input type="text" placeholder="Пароль" v-on:input="passwordFieldChange">
+          <input type="password" placeholder="Пароль" v-on:input="passwordFieldChange">
         </div>
         <button class="login__button" v-on:click="checkInDatabase">Войти</button>
         <div class="help__text">Для получения логина сделайте запрос куратору</div>
-      </div>
+      </a>
     </div>
   </div>
 </template>
 
 <script>
 import addProject from './project'
+import store from '@/store'
 export default {
   name: 'projectPage',
   props: {
@@ -69,6 +71,9 @@ export default {
     showPopUp() {
       this.isVisiblePop = true
     },
+    hidePopUp() {
+      this.isVisiblePop = false
+    },
     loginFieldChange(event) {
       this.login = event.target.value
     },
@@ -79,10 +84,10 @@ export default {
       this.authorizeUser()
     },
     authorizeUser() {
-      this.$emit("auth", "Авторизация пользователя с конкретными значениями")
+      this.$emit("auth", this)
     },
-    makeItStorm() {
-      return 1;
+    testFunction() {
+      console.log(store.getters.isAuthenticated)
     }
   }
 }
@@ -178,7 +183,7 @@ button:hover {
   width: 100%;
   height: 100%;
   z-index: 101;
-  background-color: rgba(125,165,249,0.5);
+  background: rgba(21, 22, 26, 0.2);
   overflow:hidden;
   position:fixed;
   top: 0;
@@ -193,13 +198,24 @@ button:hover {
   border-radius: 10px;
 }
 
+.b-popup-content img {
+  width: 30px;
+  height: 30px;
+  align-self: flex-end;
+  padding-right: 1%;
+  padding-top: 1%;
+}
+
+.b-popup-content img:hover {
+  cursor: pointer;
+}
 
 .login__text {
-  padding-top: 40px;
   font-weight: 500;
   font-size: 18px;
   line-height: 20px;
   color: #1B1C1F;
+  justify-content: center;
 }
 
 .credentials {
@@ -242,5 +258,4 @@ button:hover {
   color: #6B6F7B;
   margin-top: 40px;
 }
-
 </style>

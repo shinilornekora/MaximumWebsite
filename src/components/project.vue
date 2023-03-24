@@ -1,8 +1,10 @@
 <template>
-<div class="project">
-  <div class="project__logo">
-    {{GIF}}
-  </div>
+<div class="project" v-on:click="iWasClicked">
+  <router-link to="/dashboard/:id">
+    <div class="project__logo">
+      {{GIF}}
+    </div>
+  </router-link>
   <div class="project__info">
     <div class="project__name">
       {{obj.name}}
@@ -39,6 +41,7 @@
 </template>
 
 <script>
+import store from '@/store'
 export default {
   name: "addProject",
   props: {
@@ -47,15 +50,25 @@ export default {
       name: String,
       authorName: String,
       rating: String,
-      amountOfPupils: String
+      amountOfPupils: String,
+      link_d: String
     }
   },
+  methods: {
+    iWasClicked() {
+      if (!store.getters.isAuthenticated) {
+        return;
+      }
+      this.$emit('touch', this)
+    }
+  }
 }
 </script>
 <style scoped>
 * {
   box-sizing: border-box;
 }
+
 .project {
   width: 360px;
   height: 368px;

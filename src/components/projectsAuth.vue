@@ -13,13 +13,14 @@
   </div>
   <div class="project__placement">
     <div v-for="data in objects" :key="data.index">
-      <addProject v-bind:obj=data />
+      <addProject v-bind:obj=data v-on:touch="seeProject"/>
     </div>
   </div>
 </template>
 
 <script>
 import addProject from './project'
+import store from "@/store";
 export default {
   name: 'projectPageAuth',
   props: {
@@ -53,6 +54,13 @@ export default {
   methods: {
     addProject() {
       this.$emit("add", "Пользователь захотел добавить свой проект")
+    },
+    seeProject(data) {
+      this.testFunction()
+      this.$emit("touch", data)
+    },
+    testFunction() {
+      console.log(store.getters.isAuthenticated)
     }
   }
 }

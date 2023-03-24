@@ -1,38 +1,44 @@
 <template>
-  <div v-if="isAuth === false">
-    <projectPage v-on:auth="authUser"/>
-  </div>
-  <div v-else-if="addProject === false">
-    <projectPageAuth username="Sergey Lebedev" v-on:add="goToTheProjectPage"/>
-  </div>
-  <div v-else>
-    <add-project-page username="Sergey Lebedev"/>
-  </div>
+  <router-view
+      v-on:auth="checkInDatabase"
+      v-on:main="goToMain"
+      v-bind:username=username
+  />
 </template>
-
 <script>
-import projectPage from './components/projects.vue'
-import projectPageAuth from './components/projectsAuth.vue'
-import addProjectPage from "./components/addProjectPage";
+import store from './store'
+import router from '@/router'
 export default {
   name: 'App',
-  components: {
-    projectPage,
-    projectPageAuth,
-    addProjectPage
-  },
   data() {
     return {
       isAuth: false,
-      addProject: false
+      username: '',
+      database: [
+        {
+          'login': 'admin',
+          'password': '1234',
+          'username': 'Sergey Lebedev',
+        }
+      ],
     }
   },
   methods: {
-    authUser() {
-      this.isAuth = true;
+    checkInDatabase(data) {
+      data = JSON.stringify(data)
+      data = JSON.parse(data)
+      for (let i = 0; i < this.database.length; i++) {
+        if (this.database[i]['login'] === data.login && this.database[i]['password'] === data.password) {
+          this.username = this.database[i]['username']
+          store.dispatch('login')
+          return 1;
+        }
+      }
+      alert('Login failed. Check your credentials and try once more')
     },
-    goToTheProjectPage() {
-      this.addProject = true;
+    goToMain() {
+      if (store.getters.isAuthenticated)
+        router.push('/dashboard')
     }
   }
 }

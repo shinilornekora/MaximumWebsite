@@ -2,9 +2,7 @@
   <div class="header">
     <div class="header__inner">
       <div class="wrapper">
-        <router-link to="/dashboard">
-          <strong class="page__name">PROJECT</strong>
-        </router-link>
+        <strong class="page__name" v-on:click="goToMainPage">PROJECT</strong>
         <button class="sort__button">Сортировка ></button>
       </div>
       <div class="wrapper__second">
@@ -15,21 +13,25 @@
   </div>
   <div class="project__add">
     <div class="gif__place">
-      <div class="GIF__placement">
-        <div class="helpful__text">GIF</div>
-      </div>
-      <div class="link__helpful">
-        Как сделать GIF:
-        <a href="/">ссылка</a>
-      </div>
+      {{GIF}}
     </div>
     <div class="project__info">
       <div class="project__information">
-        <input type="text" placeholder="Название проекта"/>
-        <textarea placeholder="Описание"/>
+        <div>
+          {{name}}
+        </div>
+        <div>
+          {{authorName}}
+        </div>
+        <div>
+          {{description}}
+        </div>
+        <div>
+          {{amountOfView}} учеников из вашего потока оценили проект
+        </div>
       </div>
       <div class="zip__archive">
-        <div class="zipper">ZIP</div>
+        <div class="zipper">Ссылка на архив</div>
       </div>
     </div>
   </div>
@@ -37,13 +39,19 @@
 
 <script>
 export default {
-  name: "addProjectPage",
+  name: "projectViewPage",
   props: {
-    username: String
+    GIF: File,
+    username: String,
+    name: String,
+    authorName: String,
+    description: String,
+    amountOfView: Number,
+    downloadLink: String
   },
   methods: {
-    goToMain() {
-      this.$emit('main')
+    goToMainPage() {
+      this.$emit('main', this.username)
     }
   }
 }
@@ -97,9 +105,7 @@ export default {
   -webkit-box-shadow: 0 0;
   box-shadow: 0 0;
 }
-a {
-  text-decoration: none;
-}
+
 .add__project {
   background: #0057FF;
   color: #EEEEEE;
@@ -111,7 +117,6 @@ a {
 .page__name {
   font-size: 30px;
   color: #1B1C1F;
-  text-decoration: none;
 }
 
 .page__name:hover {
