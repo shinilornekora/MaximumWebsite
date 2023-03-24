@@ -8,6 +8,7 @@
       <div class="wrapper__second">
         <div class="username">{{username}}</div>
         <button class="add__project" v-on:click="addProject">Добавить проект</button>
+        <img src="@/assets/exit.png" alt="exit" v-on:click="logouting">
       </div>
     </div>
   </div>
@@ -21,6 +22,7 @@
 <script>
 import addProject from './project'
 import store from "@/store";
+import router from "@/router";
 export default {
   name: 'projectPageAuth',
   props: {
@@ -59,8 +61,9 @@ export default {
       this.testFunction()
       this.$emit("touch", data)
     },
-    testFunction() {
-      console.log(store.getters.isAuthenticated)
+    logouting() {
+      store.dispatch('logout')
+      router.push('login')
     }
   }
 }
@@ -172,6 +175,15 @@ button:hover {
   align-items: center;
   justify-content: center;
   gap: 40px;
+}
+
+.wrapper__second img {
+  width: 20px;
+  height: 20px;
+}
+
+.wrapper__second img:hover {
+  cursor: pointer;
 }
 
 .username {

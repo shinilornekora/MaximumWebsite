@@ -30,7 +30,10 @@ export default {
       for (let i = 0; i < this.database.length; i++) {
         if (this.database[i]['login'] === data.login && this.database[i]['password'] === data.password) {
           this.username = this.database[i]['username']
+          store.state.username = this.username
           store.dispatch('login')
+          store.dispatch('usernameChange')
+          router.push('dashboard')
           return 1;
         }
       }
